@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeqifu.bus.mapper.ActionMapper">
+  <resultMap id="BaseResultMap" type="com.yeqifu.bus.domain.Action">
+    <id column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="custname" jdbcType="VARCHAR" property="custname" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="career" jdbcType="VARCHAR" property="career" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+      <result column="personnumber" jdbcType="VARCHAR" property="personnumber" />
+      <result column="avgmoney" jdbcType="VARCHAR" property="avgmoney" />
+      <result column="totalmoney" jdbcType="VARCHAR" property="totalmoney" />
+      <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    identity, custname, sex, address, phone, career, createtime,personnumber,avgmoney,totalmoney,status,starttime,endtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from actions
+    where identity = #{identity,jdbcType=VARCHAR} AND sex='1'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from actions
+    where identity = #{identity,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yeqifu.bus.domain.Action">
+    insert into actions (identity, custname, sex,
+      address, phone, career, 
+      createtime,personnumber,avgmoney,totalmoney,status,starttime,endtime)
+    values (#{identity,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{personnumber,jdbcType=VARCHAR}, #{avgmoney,jdbcType=VARCHAR}, #{totalmoney,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      , #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yeqifu.bus.domain.Action">
+    insert into actions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="custname != null">
+        custname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="career != null">
+        career,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+        <if test="personnumber != null">
+            personnumber,
+        </if>
+        <if test="avgmoney != null">
+            avgmoney,
+        </if>
+        <if test="totalmoney != null">
+            totalmoney,
+        </if>
+        <if test="status != null">
+            status,
+        </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null">
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="career != null">
+        #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="personnumber != null">
+            #{personnumber,jdbcType=VARCHAR},
+        </if>
+        <if test="avgmoney != null">
+            #{avgmoney,jdbcType=VARCHAR},
+        </if>
+        <if test="totalmoney != null">
+            #{totalmoney,jdbcType=VARCHAR},
+        </if>
+        <if test="status != null">
+            #{status,jdbcType=VARCHAR},
+        </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yeqifu.bus.domain.Action">
+    update actions
+    <set>
+      <if test="custname != null">
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="career != null">
+        career = #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="personnumber != null">
+            personnumber = #{personnumber,jdbcType=VARCHAR},
+        </if>
+        <if test="avgmoney != null">
+            avgmoney #{avgmoney,jdbcType=VARCHAR},
+        </if>
+        <if test="totalmoney != null">
+            totalmoney = #{totalmoney,jdbcType=VARCHAR},
+        </if>
+        <if test="status != null">
+            status = #{status,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where identity = #{identity,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yeqifu.bus.domain.Action">
+    update actions
+    set custname = #{custname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      career = #{career,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      personnumber = #{personnumber,jdbcType=VARCHAR},
+      avgmoney = #{avgmoney,jdbcType=VARCHAR},
+      totalmoney = #{totalmoney,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where identity = #{identity,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from actions
+    <where>
+      <if test="identity!=null and identity!=''">
+        and identity LIKE concat("%",#{identity},"%")
+      </if>
+      <if test="custname!=null and custname!=''">
+        and custname LIKE concat("%",#{custname},"%")
+      </if>
+      <if test="phone!=null and phone!=''">
+        and phone LIKE concat("%",#{phone},"%")
+      </if>
+      <if test="career!=null and career!=''">
+        and career LIKE concat("%",#{career},"%")
+      </if>
+      <if test="address!=null and address!=''">
+        and address LIKE concat("%",#{address},"%")
+      </if>
+      <if test="sex!=null">
+        and sex=#{sex}
+      </if>
+        <if test="status!=null and status!=''">
+            and status =#{status}
+        </if>
+    </where>
+    order by createtime desc
+  </select>
+  <select id="getRemark" resultType="java.lang.String">
+        SELECT
+        GROUP_CONCAT(career  SEPARATOR '、')  remark
+          FROM `actions_detaile` WHERE identity =#{identity}
+  </select>
+</mapper>

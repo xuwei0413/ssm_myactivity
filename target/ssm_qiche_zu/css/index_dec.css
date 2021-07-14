@@ -1,0 +1,33 @@
+body {
+    background-image: url("../pictures/background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+
+.card-img {
+    opacity: 85%;
+}
+
+.bd-example {
+    /*margin: 3% auto;*/
+    /*width: 55%;*/
+    /* margin: 20px 50px; display: inline-flex; */
+}
+.NEWSCaptions {
+    margin: 0 auto;
+
+}
+
+.row {
+    margin: 2.5% auto;
+}
+
+.card-footer {
+    padding: 0 1.25rem;
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 0;
+}
+.card-footer>a {
+    /*margin: 0 ;*/
+}

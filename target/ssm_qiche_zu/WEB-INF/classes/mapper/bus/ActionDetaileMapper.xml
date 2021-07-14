@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeqifu.bus.mapper.ActionDetaileMapper">
+    <resultMap id="BaseResultMap" type="com.yeqifu.bus.domain.ActionDetaile">
+        <id column="id" jdbcType="VARCHAR" property="identity" />
+        <result column="identity" jdbcType="VARCHAR" property="identity" />
+        <result column="paystatus" jdbcType="VARCHAR" property="paystatus" />
+        <result column="career" jdbcType="VARCHAR" property="career" />
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id,identity,paystatus,custname, sex, address, phone, career, createtime,personnumber,avgmoney,totalmoney,status,starttime,endtime
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from actions_detaile
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from actions_detaile
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.yeqifu.bus.domain.ActionDetaile">
+         INSERT INTO actions_detaile
+                  (
+                   `identity`,
+                   `career`,
+                   `createtime`)
+      VALUES (
+              #{identity},
+              #{career},
+              NOW())
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.yeqifu.bus.domain.ActionDetaile">
+        insert into actions_detaile
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
+            <if test="paystatus != null">
+                paystatus,
+            </if>
+            <if test="career != null">
+                career,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="paystatus != null">
+                #{paystatus,jdbcType=VARCHAR},
+            </if>
+            <if test="career != null">
+                #{career,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yeqifu.bus.domain.ActionDetaile">
+        update actions_detaile
+        <set>
+            <if test="paystatus != null">
+                status = #{paystatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yeqifu.bus.domain.ActionDetaile">
+    update actions_detaile
+    set
+      paystatus = #{paystatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="checkIsUnion"  resultType="integer">
+   SELECT
+         COUNT(1) number
+        FROM
+        `actions_detaile`
+        WHERE `identity` =#{identity} AND career =#{career}
+  </select>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        t.id,t.identity,t.paystatus,
+        s.custname, s.sex, s.address, s.phone, s.career, s.createtime,s.personnumber,s.avgmoney,s.totalmoney,s.status,s.starttime,s.endtime
+        from actions_detaile t,actions s
+        where t.identity = s.identity AND t.career =#{career}
+order by createtime desc
+    </select>
+    <select id="getPersonNumber" resultType="java.lang.String">
+            SELECT
+        `personnumber`
+      FROM `actions`
+      WHERE identity =#{identity}
+    </select>
+    <select id="getJoinNumber" resultType="java.lang.String">
+          SELECT
+       COUNT(1) number
+      FROM
+      `actions_detaile`
+      WHERE identity =#{identity}
+  </select>
+</mapper>
